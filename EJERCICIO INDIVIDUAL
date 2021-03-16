@@ -1,0 +1,20 @@
+sprintf (consulta, "SELECT PUNTACUION.PUNTOS FROM (PARTIDA, JUGADOR, PUNTUACION) WHERE JUGADOR.USERNAME = 'JORDI'AND PUNTUACION.ID_P = PARTIDA.ID AND PARTIDA.ID =1", nombre);
+err=mysql_query (comn, consulta);
+if (err!=0){
+	printf ("Error al consultar datos de la base %u %s\n",
+	mysql_error(comn), mysql_error(comn));
+	exit(1);
+}
+resultado = mysql_store_result (comn);
+row = mysql_fetch_row (resultado);
+if (row == NULL)
+	printf ("No se hen obtenido datos en la consulta\n");
+else 
+	while (row != NULL) {
+	entradas = atoi (row[1]);
+	printf ("JUGADOR: %s, PUNTOS: %d\n", row[0], puntos);
+	row = mysql_fetch_row (resultado);
+	}
+mysql_close (comn);
+exit(0);
+}
